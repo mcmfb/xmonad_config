@@ -13,13 +13,14 @@ import XMonad.Layout.WindowNavigation
 
 modm = mod1Mask
 
+mainWS = "main"
+myWorkspaces = ["web", mainWS, "media", "etc" ] ++ (map show [5..10])
+
 myFullBase   = Full
 myTallBase   = Tall 1 (3/100) (1/2)
 
 myFull      = noBorders $ myFullBase
 myTiledTabs = windowNavigation $ smartBorders $ G.group myTallBase Full
-
-mainWS = "main"
 
 -- Purposefully leave 'avoidStruts' out.
 -- I do want pannels to be shown only at empty workspaces.
@@ -33,7 +34,7 @@ main = xmonad $
         focusedBorderColor = "#2020c0",
         normalBorderColor = "#202020",
         terminal = termEmulator,
-        workspaces = ["web", mainWS, "media", "etc", "5", "6", "7", "8", "9", "0"],
+        workspaces = myWorkspaces,
         layoutHook = myLayoutHook,
         focusFollowsMouse = False,
         modMask = modm
