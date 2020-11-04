@@ -5,6 +5,7 @@ import XMonad.Util.EZConfig
 import qualified XMonad.StackSet as W
 
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import qualified XMonad.Layout.Groups as G
 import XMonad.Layout.NoBorders
 import XMonad.Layout.WindowNavigation
@@ -22,12 +23,18 @@ myTall = Tall 1 (3/100) (1/2)
 myLayoutHook = windowNavigation $ smartBorders $ G.group myTall myFull
 
 -- Put all new windows in a new group below.
-myManageHook :: ManageHook
-myManageHook = do
+placeWindowInNewGroup :: MaybeManageHook
+placeWindowInNewGroup = do
     newWindow <- ask
     liftX $ windows (W.insertUp newWindow)
     liftX $ sendMessage $ G.Modify $ G.moveToNewGroupDown
     idHook
+
+myManageHook :: ManageHook
+myManageHook = composeOne [
+    ((className =? "polybar") <||> (className =? "Polybar")) -?> idHook,
+    placeWindowInNewGroup
+    ]
 
 myWorkspaces :: [String]
 myWorkspaces = ["web", "main", "media", "etc" ] ++ (map show [5..10])
