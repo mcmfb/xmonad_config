@@ -32,7 +32,9 @@ placeWindowInNewGroup = do
 
 myManageHook :: ManageHook
 myManageHook = composeOne [
-    ((className =? "polybar") <||> (className =? "Polybar")) -?> idHook,
+    ((className =? "polybar")
+        <||> (className =? "Polybar")
+        <||> (className =? "Dialog")) -?> idHook,
     placeWindowInNewGroup
     ]
 
