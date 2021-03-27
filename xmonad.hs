@@ -35,8 +35,8 @@ myManageHook :: ManageHook
 myManageHook = composeOne [
     ((className =? "polybar")
         <||> (className =? "Polybar")
-        <||> (className =? "Dialog")
-        <||> (className =? "DialogWindow")) -?> idHook,
+        <||> isDialog
+        <||> (transientTo /=? Nothing)) -?> idHook,
     placeWindowInNewGroup
     ]
 
