@@ -4,6 +4,7 @@ import XMonad
 import XMonad.Util.EZConfig
 import qualified XMonad.StackSet as W
 
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import qualified XMonad.Layout.Groups as G
@@ -42,6 +43,7 @@ myWorkspaces :: [String]
 myWorkspaces = ["web", "main", "media", "etc" ] ++ (map show [5..10])
 
 main = xmonad $
+    ewmh $
     docks $
     defaultConfig {
         borderWidth = 1,
