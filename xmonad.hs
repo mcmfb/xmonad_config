@@ -62,7 +62,6 @@ main = xmonad $
         ((modm, xK_q), kill),
 
         -- volume
-        ((modm, xK_F1), spawn volToggleMuteCmd),
         ((modm, xK_F2), spawn volDownCmd),
         ((modm, xK_F3), spawn volUpCmd),
 
